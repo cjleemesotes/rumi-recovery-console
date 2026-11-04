@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["answers", "guidance_files_used", "uncertainties"],
+  "properties": {
+    "answers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "answer", "evidence"],
+        "properties": {
+          "id": {"type": "string"},
+          "answer": {"type": "string"},
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["path", "lines"],
+              "properties": {
+                "path": {"type": "string"},
+                "lines": {"type": "string"}
+              }
+            }
+          }
+        }
+      }
+    },
+    "guidance_files_used": {"type": "array", "items": {"type": "string"}},
+    "uncertainties": {"type": "array", "items": {"type": "string"}}
+  }
+}

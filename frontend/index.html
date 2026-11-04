@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rumi recovery demo</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>Rumi recovery demo</h1>
+    <p class="disclosure">Deterministic model response; real process crash, SQLite write, and recovery</p>
+  </header>
+
+  <section class="controls" aria-label="Actions">
+    <button id="btn-run" data-testid="btn-run" type="button">Run crash demo</button>
+    <button id="btn-recover" data-testid="btn-recover" type="button">Recover result</button>
+    <span id="helper" class="helper" data-testid="helper"></span>
+  </section>
+
+  <section id="status" class="status" data-testid="status" role="status" aria-live="polite">
+    <span id="status-badge" class="badge">Loading</span>
+    <span id="status-text">Loading current state…</span>
+  </section>
+
+  <section id="error" class="error" data-testid="error" role="alert" hidden></section>
+
+  <section id="counts" class="counts" data-testid="counts" aria-label="Counters">
+    <div class="count"><span class="count-value" id="c-records">–</span><span class="count-label">database records</span></div>
+    <div class="count"><span class="count-value" id="c-results">–</span><span class="count-label">saved results</span></div>
+    <div class="count"><span class="count-value" id="c-pending">–</span><span class="count-label">pending calls</span></div>
+  </section>
+
+  <div class="panels">
+    <section class="panel" data-testid="request" aria-labelledby="h-request">
+      <h2 id="h-request">What the agent requested</h2>
+      <div id="p-request" class="panel-body"></div>
+    </section>
+    <section class="panel" data-testid="ledger-rows" aria-labelledby="h-happened">
+      <h2 id="h-happened">What actually happened</h2>
+      <div id="p-happened" class="panel-body"></div>
+    </section>
+    <section class="panel" data-testid="saved-result" aria-labelledby="h-saved">
+      <h2 id="h-saved">What Rumi saved</h2>
+      <div id="p-saved" class="panel-body"></div>
+    </section>
+  </div>
+
+  <footer>
+    <span>Run <code id="run-id" data-testid="run-id">none</code></span>
+  </footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
