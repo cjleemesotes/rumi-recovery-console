@@ -1,0 +1,37 @@
+# Local runtime data and environment files
+.rumi-console/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+*.sqlite3
+*.sqlite3-*
+*.db
+
+# Python/build/editor output
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+
+# Local coordination records, process metadata and raw model transcripts.
+# Keep these on this machine; publish the final specs, guides and eval summaries.
+/context/briefs/
+/context/worker-reports/
+/context/evidence/
+/context/evaluations/haiku/trial-*/
+/context/evaluations/haiku/baseline.json
+/context/evaluations/haiku/verification.json
+/context/evaluations/haiku/guidance-snapshot.json
+/context/evaluations/haiku/run_trial.py
