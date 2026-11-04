@@ -1,0 +1,37 @@
+{
+  "name": "rumi-recovery-console",
+  "account_id": "770fb0b5d88bde355a9a5d3290d49865",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-11-04",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    {
+      "pattern": "mineai.net/recovery-agent*",
+      "zone_id": "95d093b970c82933e481fbd6209f69e5"
+    }
+  ],
+  "assets": {
+    "directory": "../../frontend",
+    "binding": "ASSETS",
+    "run_worker_first": true,
+    "html_handling": "none",
+    "not_found_handling": "none"
+  },
+  "vpc_services": [
+    {
+      "binding": "RECOVERY_API",
+      "service_id": "01a1a62f-1fe8-7fd2-b748-a1d313690851"
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "API_RATE_LIMITER",
+      "namespace_id": "8753015",
+      "simple": {
+        "limit": 30,
+        "period": 60
+      }
+    }
+  ]
+}

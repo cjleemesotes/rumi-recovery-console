@@ -2,6 +2,9 @@
 
 This folder holds the root launcher and the complete-flow checks for the Rumi recovery console. Run every command from the repository root after following the root README's setup.
 
+The optional [Cloudflare hosting bridge](hosting/README.md) serves the frontend at
+`mineai.net/recovery-agent/` and connects a separate public demo instance on this PC.
+
 ## Commands (unchanged)
 
 ```powershell

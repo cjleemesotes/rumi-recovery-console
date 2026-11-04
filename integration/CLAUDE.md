@@ -15,6 +15,7 @@ Flow checks choose temporary storage and a free loopback port, then start the re
 
 - `workspace.py`: integration's code-root/import-path configuration, Rumi checkout/source paths, loopback host and default port. Resolve from package location, not shell cwd.
 - `serve.py`: stable launcher and preflight. It imports Rumi/core to check their origin; find_spec locates the agent/worker without importing them. Importing backend.server also imports the pure demo.runner. No World is constructed by the parent demo runtime.
+- `hosting/`: optional Cloudflare static frontend/API bridge and Windows host supervisor. Read its README before deploying; preserve the private user-profile credentials and isolated public data. Hosting never uses the local walkthrough storage.
 - `test_flow.py`: stable command entrypoint, delegating to checks/suite.py.
 - `checks/results.py`: one shared RECORDER, record_check, record_check_or_abort and SectionAborted. Reset/mutate in place so importers keep the same object.
 - `checks/expectations.py`: independent expected identity, payment, result and State fields; literal expectations are deliberate.
