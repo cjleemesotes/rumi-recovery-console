@@ -32,6 +32,10 @@ From this workspace root in PowerShell:
 
 Open [the console](http://127.0.0.1:8765/). One Python server serves both the page and API. The existing Rumi environment is used; no frontend build step is required.
 
+## Hosted demo
+
+[mineai.net/recovery-agent](https://mineai.net/recovery-agent/) serves the frontend on Cloudflare and connects the API to a dedicated instance on the host PC. The PC must stay awake and online. Hosting uses separate shared demo data; the original local walkthrough is preserved. See [hosting instructions](integration/hosting/README.md) for the background start/status commands and deployment details.
+
 ## Where code belongs
 
 ```text
