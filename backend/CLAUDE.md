@@ -44,6 +44,7 @@ Missing/unreadable assets give a 404 JSON error; never interpret a URL as an arb
 - Unexpected exceptions or a non-dict runner return produce 500 internal_error; traceback stays on stderr.
 - Loopback hosts only; non-loopback host or relative code root raises ValueError. Port 0 selects an ephemeral port.
 - Windows uses exclusive binding before bind; a second server fails. `serve` reports bind failure and exits 1.
+- POSIX enables address reuse for immediate restart after TIME_WAIT. Port reuse stays disabled, so a second live listener still fails.
 
 ## Change and check
 
