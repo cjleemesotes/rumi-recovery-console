@@ -18,11 +18,20 @@ __all__ = ["ExclusiveLoopbackServer", "make_server", "serve"]
 
 LOOPBACK_HOSTS = {"127.0.0.1", "::1"}
 
+# Windows only: SO_EXCLUSIVEADDRUSE forbids any other socket on the port.
+SUPPORTS_EXCLUSIVE_BIND = hasattr(socket, "SO_EXCLUSIVEADDRUSE")
+
 
 class ExclusiveLoopbackServer(HTTPServer):
-    """HTTPServer that carries the two roots and refuses port sharing on Windows."""
+    """HTTPServer that carries the two roots and never shares its port.
 
-    allow_reuse_address = False
+    Windows: SO_REUSEADDR would let a second process share the port, so it stays off and
+    SO_EXCLUSIVEADDRUSE is used instead. POSIX: SO_REUSEADDR (no SO_REUSEPORT) only lets an
+    immediate restart rebind past TIME_WAIT; a live listener still makes the bind fail.
+    """
+
+    allow_reuse_address = not SUPPORTS_EXCLUSIVE_BIND
+    allow_reuse_port = False  # Never opt into concurrent listeners on one address/port.
 
     def __init__(self, address, request_handler_class, *, code_root: Path, storage_root: Path):
         self.code_root = Path(code_root)
@@ -32,9 +41,8 @@ class ExclusiveLoopbackServer(HTTPServer):
         super().__init__(address, request_handler_class)
 
     def server_bind(self) -> None:
-        # On Windows SO_REUSEADDR would let a second process share the port;
-        # SO_EXCLUSIVEADDRUSE (set before bind) makes a second bind fail.
-        if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+        # Set before bind so a second bind fails on Windows.
+        if SUPPORTS_EXCLUSIVE_BIND:
             self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
         super().server_bind()
 
