@@ -30,6 +30,7 @@ jobs:
         run: |
           python -m integration.serve --check
           node --check frontend/assets/js/console.js
+          node --test integration/hosting/worker.test.mjs
       - name: Check real crash, recovery, repetition and refusals
         run: python -m integration.test_flow --keep
       - name: Check the existing recovery API
